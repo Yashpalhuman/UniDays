@@ -86,7 +86,7 @@ const FilterDropdown = ({ currentPage, sortBy, order, filters, query }: FilterDr
             <div className="flex justify-between"><Image src="/girls_icon (2).svg" alt='events' width={17} height={17}/>Girls Gang</div>
             </button>
             <button onClick={() => handleFilterChange('bb')} className={`block rounded-b-xl w-full text-left px-4 py-3 text-sm ${selectedFilters.includes('') ? 'bg-green-100 text-gray-900' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'}`}>
-            <div className="flex justify-between"><Image src="/boys_icon.svg" alt='events' width={17} height={17}/>Just cow"Boys"</div>
+            <div className="flex justify-between"><Image src="/boys_icon.svg" alt='events' width={17} height={17}/>Just cow&#34;Boys&#34;</div>
             </button>
           </div>
         </div>
