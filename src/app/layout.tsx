@@ -7,7 +7,7 @@ import Footer from "@/Layoutcomponents/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Travel.com",
+  title: "UniDays",
   description: "Travel community for kgp",
 };
 
