@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SortDropdown from "@/components/SortDropdown";
 import FilterDropdown from '@/components/FilterDropdown';
-import { ArrowRight } from "lucide-react"; 
+
 
 const ITEMS_PER_PAGE = 9;
 
