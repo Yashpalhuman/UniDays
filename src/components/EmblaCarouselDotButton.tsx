@@ -60,12 +60,22 @@ type PropType = PropsWithChildren<
   >
 >
 
-export const DotButton: React.FC<PropType> = (props) => {
-  const { children, ...restProps } = props
-
-  return (
-    <button type="button" {...restProps}>
-      {children}
-    </button>
-  )
-}
+export const DotButton = ({
+  className = '',
+  ...rest
+}: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
+  <button
+    type="button"
+    /*  w-2.5 = 10 px, h-2.5 = 10 px on <640 px  
+        sm:w-3.5  sm:h-3.5 = 14 px on ≥640 px  */
+    className={`
+      w-2.5 h-2.5 sm:w-3.5 sm:h-3.5
+      rounded-full bg-gray-400
+      transition-colors duration-200
+      hover:bg-gray-600
+      focus:outline-none focus:ring-2 focus:ring-emerald-500
+      ${className}
+    `}
+    {...rest}
+  />
+)

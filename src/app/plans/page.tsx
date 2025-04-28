@@ -3,20 +3,24 @@ import Image from "next/image";
 import Link from "next/link";
 import SortDropdown from "@/components/SortDropdown";
 import FilterDropdown from '@/components/FilterDropdown';
+import { ArrowRight } from "lucide-react"; 
 
+const ITEMS_PER_PAGE = 9;
 
-const ITEMS_PER_PAGE = 6;
-
-type Trip = {
+export type Trip = {
   id: number;
   src: string;
   destination: string;
-  date: string;
+  date: string;        // ISO-8601 preferred ("2025-05-12")
+  duration: number;  
   size: number;
   reqpep: number;
-  duration: number;
-  category: string[];
+  categories: string[];   
 };
+
+interface Props {
+  trips: Trip[];
+}
 
 const fetchPaginatedData = async (page: number, sortBy: string, order: string, filters: string[], query: string) => {
   let filteredData = UP_DATA;
@@ -82,18 +86,62 @@ const ServerPaginatedData = async ({ searchParams }: { searchParams: { page?: st
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10">
         {trips.map((trip) => (
-          <div key={trip.id} className="p-4 rounded-3xl border-2 border-gray-800 shadow-[inset_0px_0px_56px_9px_rgba(107,_203,_107,_0.28)] hover:shadow-[inset_0px_0px_56px_9px_rgba(206,_58,_62,_0.28)] transition-transform duration-300 ease">
-            <Image src={trip.src} alt={trip.destination} width={300} height={200} className="w-full h-[19rem] object-cover rounded-[30px] hover:scale-90 transition-transform duration-300 ease cursor-pointer" />
-            <div className="text-2xl font-serif font-bold text-stroke mt-4">{trip.destination}</div>
-            <p className="text-lg mt-2">
-              Date : <span className="italic text-black font-semibold opacity-65">{trip.date}</span>
+          <div
+          key={trip.id}
+          className="
+            group relative flex flex-col rounded-3xl
+            border-2 border-gray-800 bg-white/70 backdrop-blur-sm
+            shadow-[inset_0_0_44px_6px_rgba(107,203,107,0.30)]
+            hover:shadow-[inset_0_0_44px_6px_rgba(206,58,62,0.30)]
+            hover:-translate-y-1.5
+            transition-all duration-300 ease-out
+          "
+        >
+          <Image
+            src={trip.src}
+            alt={trip.destination}
+            width={300}
+            height={200}
+            className="
+              w-full h-60 object-cover rounded-t-[22px]
+              transition-transform duration-300 ease-out
+              group-hover:scale-105
+              cursor-pointer
+            "
+          />
+        
+          <div className="p-5 flex flex-col gap-3">
+            {/* destination */}
+            <h3 className="text-xl font-semibold font-serif tracking-tight text-gray-900">
+              {trip.destination}
+            </h3>
+        
+            {/* meta line (wraps on small screens) */}
+            <p className="flex flex-wrap gap-x-4 gap-y-1 text-[0.85rem] text-gray-600">
+              <span><span className="font-medium text-gray-700">Date:</span> <time className="italic">{trip.date}</time></span>
+              <span className="hidden sm:inline">•</span>
+              <span><span className="font-medium text-gray-700">Days:</span> {trip.duration}</span>
+              <span className="hidden sm:inline">•</span>
+              <span><span className="font-medium text-gray-700">Size:</span> {trip.size}</span>
+              <span className="hidden sm:inline">•</span>
+              <span><span className="font-medium text-gray-700">Req:</span> {trip.reqpep}</span>
             </p>
-            <p className="text-sm mt-0">
-              Duration : <span className="font-semibold">{trip.duration} days</span>
-            </p>
-            <p className="text-md mt-2 font-mono text-black">Group size: {trip.size}</p>
-            <p className="text-md font-mono text-black">Required people: {trip.reqpep}</p>
+        
+            {/* CTA */}
+            <a
+              href="#"
+              className="
+                mt-auto inline-flex items-center gap-1 self-start text-[0.9rem] font-medium
+                text-emerald-700 hover:text-emerald-800
+              "
+            >
+              View details
+              <span className="inline-block translate-x-0 group-hover:translate-x-1 transition-transform">
+                →
+              </span>
+            </a>
           </div>
+        </div>
         ))}
       </div>
       <div className="flex justify-between mt-16 mx-8">
