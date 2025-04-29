@@ -66,15 +66,39 @@ const EmblaCarousel2: React.FC<PropType> = (props) => {
     <div className="embla2__container">
       {slides.map((slide) => (
         <div className="embla2__slide" key={slide.id}>
-          <img src={slide.src} alt={slide.destination} className="embla2__slide__img" />
-          <div className="embla2__slide__content ml-1 mt-1">
-            <div className="text-2xl font-serif font-bold text-stroke">{slide.destination}</div>
-            <p className="text-lg mt-2">Date :  <span className='italic text-black font-semibold opacity-65'>{slide.date}</span></p>
-            <p className="text-sm mt-0">Duration : <span className='font-semibold'>{slide.duration} days</span></p>
-            <p className="text-md mt-2 font-mono text-black">Group size: {slide.size}</p>  
-            <p className="text-md font-mono text-black">Required people: {slide.reqpep}</p>
+        {/* Image */}
+        <img
+          src={slide.src}
+          alt={slide.destination}
+          className="w-full h-64 object-cover rounded-2xl shadow-md transition-transform duration-300 ease-in-out hover:scale-105"
+        />
+      
+        {/* Content */}
+        <div className="ml-1 mt-4 flex flex-col gap-2 text-gray-800">
+          {/* Destination Title */}
+          <div className="text-2xl font-serif font-bold text-stroke">{slide.destination}</div>
+      
+          {/* Trip Info */}
+          <div className="grid grid-cols-2 text-sm md:text-base gap-y-1">
+            <p className="col-span-2">
+              <span className="font-medium text-gray-700">Date:</span>{" "}
+              <span className="italic opacity-80">{slide.date}</span>
+            </p>
+            <p>
+              <span className="font-medium text-gray-700">Duration:</span>{" "}
+              <span className="font-semibold">{slide.duration} days</span>
+            </p>
+            <p>
+              <span className="font-medium text-gray-700">Group size:</span>{" "}
+              {slide.size}
+            </p>
+            <p>
+              <span className="font-medium text-gray-700">Required:</span>{" "}
+              {slide.reqpep}
+            </p>
           </div>
         </div>
+      </div>
       ))}
     </div>
   </div>

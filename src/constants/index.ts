@@ -1,7 +1,7 @@
 //NavBar
 export const NAV_LINKS = [
     { href: '/', key: 'home', label: 'Home'},
-    { href: '/', key: 'about_us', label: 'About Us'},
+    { href: '/about_us', key: 'about_us', label: 'About Us'},
     { href: '/plans', key: 'plans', label: 'Plans'}
 ];
 

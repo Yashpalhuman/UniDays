@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 9;
 
 type Ride = {
   id: number;
@@ -37,17 +37,78 @@ const ServerPaginatedData = async ({ searchParams }: { searchParams: { page?: st
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10">
         {rides.map((trip) => (
           
-          <div key={trip.id} className=" p-4 rounded-3xl border-2 border-gray-800 shadow-[inset_0px_0px_56px_9px_rgba(107,_203,_107,_0.28)] hover:shadow-[inset_0px_0px_56px_9px_rgba(206,_58,_62,_0.28)] transition-transform duration-300 ease">
-            <Image src={trip.src} alt={trip.destination} width={300} height={200} className="w-full h-[19rem] rounded-[30px] hover:scale-90 transition-transform duration-300 ease cursor-pointer" />
-          <div className="embla3__trip__content ml-1 mt-1">
-            <div className="text-2xl font-serif font-bold text-stroke">{trip.destination}</div>
-            <p className="text-lg mt-2">Date :  <span className='italic text-black font-semibold opacity-65'>{trip.date}</span></p>
-            <p className="text-md mt-0"><span className='font-semibold'>{trip.description}</span></p>
-            <p className="text-md mt-2 font-mono text-black">Group size: {trip.size}</p>  
-            {trip.reqpep && (<p className="text-md font-mono text-black">Required people: {trip.reqpep}</p>)}
+          <div
+  key={trip.id}
+  className="
+    group relative flex flex-col rounded-3xl
+    border-2 border-gray-800 bg-white/70 backdrop-blur-sm
+    shadow-[inset_0_0_44px_6px_rgba(107,203,107,0.30)]
+    hover:shadow-[inset_0_0_44px_6px_rgba(206,58,62,0.30)]
+    hover:-translate-y-1.5
+    transition-all duration-300 ease-out
+  "
+>
+  {/* Image */}
+  <Image
+    src={trip.src}
+    alt={trip.destination}
+    width={300}
+    height={200}
+    className="
+      w-full h-[19rem] object-cover rounded-t-[20px]
+      transition-transform duration-300 ease-out
+      group-hover:scale-105
+      cursor-pointer
+    "
+  />
 
-          </div>
-          </div>
+  {/* Content */}
+  <div className="p-5 flex flex-col gap-3 embla3__trip__content">
+    {/* Destination Title */}
+    <h3 className="text-2xl font-serif font-bold tracking-tight text-gray-900">
+      {trip.destination}
+    </h3>
+
+    {/* Date */}
+    <p className="text-lg">
+      <span className="font-medium text-gray-700">Date:</span>{" "}
+      <span className="italic text-black font-semibold opacity-65">{trip.date}</span>
+    </p>
+
+    {/* Description (optional) */}
+    {trip.description && (
+      <p className="text-md text-gray-700 mt-0">
+        <span className="font-semibold">{trip.description}</span>
+      </p>
+    )}
+
+    {/* Group Size + Required People */}
+    <p className="flex flex-wrap gap-x-4 gap-y-1 text-[0.85rem] text-gray-600">
+      <span><span className="font-medium text-gray-700">Group size:</span> {trip.size}</span>
+      {trip.reqpep !== undefined && (
+        <>
+          <span className="hidden sm:inline">•</span>
+          <span><span className="font-medium text-gray-700">Required:</span> {trip.reqpep}</span>
+        </>
+      )}
+    </p>
+
+    {/* CTA Button */}
+    <a
+      href="#"
+      className="
+        mt-auto inline-flex items-center gap-1 self-start text-[0.9rem] font-medium
+        text-emerald-700 hover:text-emerald-800
+      "
+    >
+      View details
+      <span className="inline-block translate-x-0 group-hover:translate-x-1 transition-transform">
+        →
+      </span>
+    </a>
+  </div>
+</div>
+
         ))}
       </div>
   
