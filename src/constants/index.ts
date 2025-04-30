@@ -100,3 +100,60 @@ export const FOOTER_LINKS = [
       {icon:'/wordpress.svg', handle:'https://wordpress.com'},
     ],
   };
+
+  export interface User {
+    id: string
+    name: string
+    email: string
+    phone: string
+    avatar: string       // path in /public
+    verified: boolean
+  }
+  
+  export const USER: User = {
+    id: '1',
+    name: 'Kanika Sharma',
+    email: 'kanikasharma@gkpian.iitkgp.ac.in',
+    phone: '+91 95170 67231',
+    avatar: '/kanika_avatar.jpg',   // drop this into your public/ folder
+    verified: true,
+  }
+
+
+  // data/plans.ts
+
+export interface Plan {
+  id: number
+  type: 'Vacation' | 'Event' | 'Cab Sharing'
+  src: string           // image path in /public
+  destination: string
+  location: string
+  dateFrom: string      // e.g. '10 May'
+  dateTo: string        // e.g. '16 May'
+  size: number          // total people
+  men: number
+  women: number
+  others?: number       // optional “others” category
+  stops: string[]       // tentative stops
+  description: string
+}
+
+export const PLANS: Plan[] = [
+  {
+    id: 1,
+    type: 'Vacation',
+    src: '/ladakh.jpg',
+    destination: 'Ladakh',
+    location: 'Jammu And Kashmir',
+    dateFrom: '10 May',
+    dateTo: '16 May',
+    size: 8,
+    men: 5,
+    women: 3,
+    // others: 2, // if you have an “other” category
+    stops: ['Guru lake', 'Nathula'],
+    description:
+      'Full bakchodi hone wali hai, Sikkim mai naam raushan karke aa hai !!!',
+  },
+  // you can add more plans here…
+]
